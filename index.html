@@ -19,66 +19,76 @@
               min-height:150px;
               height:150px;
             }
+            div.card-image .img-responsive .card-title {
+              padding:16px;
+              font-size: 1.8em;
+            }
         </style>
     </head>
     <body>
       <div class="container">
         <h1>Color Palette Deconstructor</h1>
         <div class="columns">
-          <div class="column col-sm-4">
+          <div class="column col-xs-12">
             <div class="card" id="color1">
               <div class="card-image">
-                <div class="img-responsive" style="background:#bada55;"></div>
+                <div class="img-responsive" style="background:#bada55;">
+                    <div class="card-title h5 text-light"></div>
+                </div>
               </div>
               <div class="card-header">
                 <div class="card-title h5"></div>
                 <div class="card-subtitle text-gray"></div>
               </div>
               <div class="card-body">
-                <input class="nosepicker" data-color="#color1" type="text">
+                <input class="nosepicker" data-color="#color1" type="text" value="#bada55">
               </div>
               <div class="card-footer">
                 <button class="btn btn-primary"><i class="icon icon-plus"></i></button>
                 <button class="btn btn-primary"><i class="icon icon-cross"></i></button>
-                <button class="btn btn-primary"><i class="icon icon-menu"></i></button>
+                <button class="btn btn-primary"><i class="icon icon-flag"></i></button>
               </div>
             </div>
           </div>
-          <div class="column col-sm-4">
+          <div class="column col-xs-12">
             <div class="card" id="color2">
               <div class="card-image">
-                <div class="img-responsive" style="background:#bada44;"></div>
+                <div class="img-responsive" style="background:#bada44;">
+                    <div class="card-title h5 text-light"></div>
+                </div>
               </div>
               <div class="card-header">
                 <div class="card-title h5"></div>
                 <div class="card-subtitle text-gray"></div>
               </div>
               <div class="card-body">
-                <input class="nosepicker" data-color="#color2" type="text">
+                <input class="nosepicker" data-color="#color2" type="text" value="#bada44">
               </div>
               <div class="card-footer">
                 <button class="btn btn-primary"><i class="icon icon-plus"></i></button>
                 <button class="btn btn-primary"><i class="icon icon-cross"></i></button>
-                <button class="btn btn-primary"><i class="icon icon-menu"></i></button>
+                <button class="btn btn-primary"><i class="icon icon-flag"></i></button>
               </div>
             </div>
           </div>
-          <div class="column col-sm-4">
+          <div class="column col-xs-12">
             <div class="card" id="color3">
               <div class="card-image">
-                <div class="img-responsive" style="background:#bada22;"></div>
+                <div class="img-responsive" style="background:#bada11;">
+                    <div class="card-title h5 text-light"></div>
+                </div>
               </div>
               <div class="card-header">
                 <div class="card-title h5"></div>
                 <div class="card-subtitle text-gray"></div>
               </div>
               <div class="card-body">
-                <input class="nosepicker" data-color="#color3" type="text">
+                <input class="nosepicker" data-color="#color3" type="text" value="#bada11">
               </div>
               <div class="card-footer">
                 <button class="btn btn-primary"><i class="icon icon-plus"></i></button>
                 <button class="btn btn-primary"><i class="icon icon-cross"></i></button>
-                <button class="btn btn-primary"><i class="icon icon-menu"></i></button>
+                <button class="btn btn-primary"><i class="icon icon-flag"></i></button>
               </div>
             </div>
           </div>
@@ -90,27 +100,63 @@
 			  crossorigin="anonymous"></script>
       <script src='js/spectrum.js'></script>
       <script>
+        function colorChange(targetid, color){
+          //var whichitem = $(triggertarget).attr("data-color");
+          //return whichitem
+          //console.log(targetid, color);
+          var coloroutput = [
+            color.toHexString(),
+            color.toRgbString(),
+            color.toHsvString(),
+            color.toHsv(),
+            color.toHslString(),
+            color.toHsl(),
+            color.toName()
+          ];
+          //console.log(color);
+          $("div"+targetid+" .card-image .img-responsive").css('background',coloroutput[0]);
+          //$("div"+targetid+" .card-header .card-title").text(coloroutput[0]);
+          $("div"+targetid+" .card-title").text(coloroutput[0]);
+          $("div"+targetid+" .card-header .card-subtitle")
+              .html(
+                coloroutput[1]+"<br>"+
+                coloroutput[2]+"<br>"+
+                coloroutput[4]+"<br>"+
+                coloroutput[6]
+              );
+          $("h1").css('color',coloroutput[0]);
+          return coloroutput;
+        }
         $("input.nosepicker").spectrum({
           color: '#bada55',
+          preferredFormat: "hex",
           showInitial: true,
           showInput: true,
           allowEmpty: true,
-          showPalette: true,
-          showSelectionPalette: true,
           palette: ["#ff9900","#bada55"],
-          move: function(color){
-            //var whichitem = $(this).attr("id");
-            var coloroutput = [
-              color.toHexString(),
-              color.toRgbString(),
-              color.toHsvString(),
-              color.toHslString()
-            ];
-            //alert("div"+whichitem+" .card-image .img-responsive");
-            $("div"+whichitem+" .card-image .img-responsive").css('background',coloroutput[0]);
-            $("div"+whichitem+" .card-header .card-title").text(coloroutput[0]);
-            $("div"+whichitem+" .card-header .card-subtitle").html(coloroutput[1]+"<br>"+coloroutput[2]+"<br>"+coloroutput[3]);
-          }
+          showButtons: false
+        });
+        $("input.nosepicker").on('move.spectrum', function(e, color){
+            var thisitem = e.target;
+            var whichitem = $(thisitem).attr("data-color");
+            colorChange(whichitem, color);
+        });
+        $("input.nosepicker").on('change.spectrum', function(e, color){
+            var thisitem = e.target;
+            var whichitem = $(thisitem).attr("data-color");
+            colorChange(whichitem, color);
+        });
+        $("input.nosepicker").on('show.spectrum', function(e, color){
+            var thisitem = e.target;
+            var whichitem = $(thisitem).attr("data-color");
+            colorChange(whichitem, color);
+        });
+        $(document).ready(function(){
+            // Trying to set defaults
+            // Triggering artificial change event
+            $("input.nosepicker[data-color='#color1']").spectrum("set","#aa2211");
+            $("input.nosepicker[data-color='#color1']").trigger("move.spectrum");
+            $("input.nosepicker[data-color='#color1']").spectrum("toggle");
         });
       </script>
     </body>
