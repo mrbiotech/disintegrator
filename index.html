@@ -100,10 +100,26 @@
 			  crossorigin="anonymous"></script>
       <script src='js/spectrum.js'></script>
       <script>
+        $(document).ready(function(){
+          // Trying to set defaults
+          // Triggering artificial change event
+          $("input.nosepicker").spectrum({
+            color: '#bada55',
+            preferredFormat: "hex",
+            showInitial: true,
+            showInput: true,
+            allowEmpty: true,
+            palette: ["#ff9900","#bada55"],
+            showButtons: false
+          });
+          $("input.nosepicker").each(function() {
+            $(this).spectrum("set","#bada55");
+            $(this).spectrum("show");
+            $(this).spectrum("hide");
+          });
+        });
         function colorChange(targetid, color){
-          //var whichitem = $(triggertarget).attr("data-color");
-          //return whichitem
-          //console.log(targetid, color);
+          var color = color;
           var coloroutput = [
             color.toHexString(),
             color.toRgbString(),
@@ -113,9 +129,7 @@
             color.toHsl(),
             color.toName()
           ];
-          //console.log(color);
           $("div"+targetid+" .card-image .img-responsive").css('background',coloroutput[0]);
-          //$("div"+targetid+" .card-header .card-title").text(coloroutput[0]);
           $("div"+targetid+" .card-title").text(coloroutput[0]);
           $("div"+targetid+" .card-header .card-subtitle")
               .html(
@@ -127,36 +141,20 @@
           $("h1").css('color',coloroutput[0]);
           return coloroutput;
         }
-        $("input.nosepicker").spectrum({
-          color: '#bada55',
-          preferredFormat: "hex",
-          showInitial: true,
-          showInput: true,
-          allowEmpty: true,
-          palette: ["#ff9900","#bada55"],
-          showButtons: false
-        });
         $("input.nosepicker").on('move.spectrum', function(e, color){
-            var thisitem = e.target;
-            var whichitem = $(thisitem).attr("data-color");
-            colorChange(whichitem, color);
+          var thisitem = e.target;
+          var whichitem = $(thisitem).attr("data-color");
+          colorChange(whichitem, color);
         });
         $("input.nosepicker").on('change.spectrum', function(e, color){
-            var thisitem = e.target;
-            var whichitem = $(thisitem).attr("data-color");
-            colorChange(whichitem, color);
+          var thisitem = e.target;
+          var whichitem = $(thisitem).attr("data-color");
+          colorChange(whichitem, color);
         });
         $("input.nosepicker").on('show.spectrum', function(e, color){
-            var thisitem = e.target;
-            var whichitem = $(thisitem).attr("data-color");
-            colorChange(whichitem, color);
-        });
-        $(document).ready(function(){
-            // Trying to set defaults
-            // Triggering artificial change event
-            $("input.nosepicker[data-color='#color1']").spectrum("set","#aa2211");
-            $("input.nosepicker[data-color='#color1']").trigger("move.spectrum");
-            $("input.nosepicker[data-color='#color1']").spectrum("toggle");
+          var thisitem = e.target;
+          var whichitem = $(thisitem).attr("data-color");
+          colorChange(whichitem, color);
         });
       </script>
     </body>

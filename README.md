@@ -5,7 +5,7 @@ Color Theme Disintegrator
 ## Description
 
 
-## Development plan
+## Purpose and usage
 
 1. Input RGB/HSL/HSV colors from someone's palette
 2. Pick a focus color
@@ -13,6 +13,17 @@ Color Theme Disintegrator
 4. Possibly use Isotope to dynamically add elements for unlimited color combos
 5. Start learning how to use ReactJS on this?
 
+## TODO
+
+- [X] Create a fixed number of palette picker widgets
+    - Must show RGB, HSV, HSL version of colors
+    - Color picker widget must dynamically update color swatch in card
+    - Swatches autopopulate on page load
+- [ ] Re-theme Spectre.CSS buttons
+- [ ] Show color value deltas from first color in cards
+- [ ] Enable dynamic numbers of palette widgets
+    - Might use React for this
+- [ ] Enable selection of focus color
 
 - Possible Javascript libraries for color pickers:
   * [[https://jscolor.com][jscolor.com]]
