@@ -19,8 +19,9 @@ Color Theme Disintegrator
     - Must show RGB, HSV, HSL version of colors
     - Color picker widget must dynamically update color swatch in card
     - Swatches autopopulate on page load
-- [ ] Re-theme Spectre.CSS buttons
-- [ ] Show color value deltas from first color in cards
+- [X] Re-theme Spectre.CSS buttons
+- [X] Show color value deltas from first color in cards
+- [ ] Put color calculations in a grid so they're more readable
 - [ ] Enable dynamic numbers of palette widgets
     - Might use React for this
 - [ ] Enable selection of focus color
