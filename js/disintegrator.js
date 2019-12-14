@@ -1,16 +1,19 @@
 $(document).ready(function(){
   $("input.nosepicker").spectrum({
-    color: '#ff7f00',
+    color: '#007fff',
     preferredFormat: "hex",
     showInitial: true,
     showInput: true,
     allowEmpty: true,
-    palette: ["#ff7f00","#7f00ff"],
+    showPalette: true,
+    showSelectionPalette: true,
+    localStorageKey: "disintegrator.palette",
+    palette: ["#007fff","#00ff7f","#7fff00","#ff7f00","#ff007f","#7f00ff"],
+    selectionPalette: ["#007fff","#00ff7f","#7fff00","#ff7f00","#ff007f","#7f00ff"],
     showButtons: false
   });
   // Populate cards with initial color info
   $("input.nosepicker").each(function() {
-    //$(this).spectrum("set","#007fff");
     switch( $(this).attr("data-color")){
       case "#color1":
         $(this).spectrum("set","#007fff");
@@ -126,16 +129,7 @@ function calcDifference(id1, id2){
   return deltas;
 }
 
-$("button#calctest").click(function(){
-  calcDifference("#color1", "#color2");
-});
-
-//Trigger events to show color pickers
-//$("div.card-image .img-responsive").click(function(){
-//    var whichitem = $(this).attr("data-color");
-//    $("input[data-color*='color1']").spectrum("show");
-//    $("input.nosepicker[data-color=\""+whichitem+"\"]").spectrum("show");
-//});
+// Trigger events to show color pickers
 $("input.nosepicker").on('move.spectrum', function(e, color){
   var thisitem = e.target;
   var whichitem = $(thisitem).attr("data-color");
@@ -152,3 +146,12 @@ $("input.nosepicker").on('show.spectrum', function(e, color){
   colorChange(whichitem, color);
 });
 
+
+// Show respective color picker when card header is clicked
+$("div.card-image .img-responsive").click(function(color){
+  var whichitem = $(this).attr("data-color");
+  var whichpicker = "input.nosepicker[data-color=\""+whichitem+"\"]";
+  $(whichpicker).spectrum("toggle");
+  // Important to keep picker from closing immediately after opening
+  return false;
+});
