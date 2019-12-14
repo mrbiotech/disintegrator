@@ -21,7 +21,7 @@ Color Theme Disintegrator
     - Swatches autopopulate on page load
 - [X] Re-theme Spectre.CSS buttons
 - [X] Show color value deltas from first color in cards
-- [ ] Put color calculations in a grid so they're more readable
+- [x] Put color calculations in a grid so they're more readable
 - [ ] Enable dynamic numbers of palette widgets
     - Might use React for this
 - [ ] Enable selection of focus color

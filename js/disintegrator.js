@@ -1,16 +1,36 @@
 $(document).ready(function(){
   $("input.nosepicker").spectrum({
-    color: '#bada55',
+    color: '#ff7f00',
     preferredFormat: "hex",
     showInitial: true,
     showInput: true,
     allowEmpty: true,
-    palette: ["#ff9900","#bada55"],
+    palette: ["#ff7f00","#7f00ff"],
     showButtons: false
   });
   // Populate cards with initial color info
   $("input.nosepicker").each(function() {
-    $(this).spectrum("set","#bada55");
+    //$(this).spectrum("set","#007fff");
+    switch( $(this).attr("data-color")){
+      case "#color1":
+        $(this).spectrum("set","#007fff");
+        break;
+      case "#color2":
+        $(this).spectrum("set","#00ff7f");
+        break;
+      case "#color3":
+        $(this).spectrum("set","#7fff00");
+        break;
+      case "#color4":
+        $(this).spectrum("set","#ff7f00");
+        break;
+      case "#color5":
+        $(this).spectrum("set","#ff007f");
+        break;
+      case "#color6":
+        $(this).spectrum("set","#7f00ff");
+        break;
+    }
     $(this).spectrum("show");
     $(this).spectrum("hide");
   });
@@ -25,27 +45,41 @@ function colorChange(targetid, color){
     color.toHsv(),
     color.toHslString(),
     color.toHsl(),
-    color.toName()
+    color.toName(),
+    color.toRgb()
   ];
   var deltas = calcDifference("#color1", targetid);
   $("div"+targetid+" .card-image .img-responsive").css('background',coloroutput[0]);
   $("div"+targetid+" .card-title").text(coloroutput[0].toUpperCase());
   if (targetid == "#color1") {
-    $("div"+targetid+" .card-header .card-subtitle")
-      .html(
-        //coloroutput[1]+"<span class=\"text-warning\">"+deltas["r"]+"</span><br>"+
-        coloroutput[1]+"<br>"+
-        coloroutput[3]["h"]+"<br>"+
-        coloroutput[4]+"<br>"
-      );
+    $("#color1 td.rValue").text(coloroutput[7]["r"]);
+    $("#color1 td.gValue").text(coloroutput[7]["g"]);
+    $("#color1 td.bValue").text(coloroutput[7]["b"]);
+    $("#color1 td.hsvHValue").text((coloroutput[3]["h"]).toFixed(0));
+    $("#color1 td.hsvSValue").text((coloroutput[3]["s"]*100).toFixed(0));
+    $("#color1 td.hsvVValue").text((coloroutput[3]["v"]*100).toFixed(0));
+    $("#color1 td.hslHValue").text((coloroutput[5]["h"]).toFixed(0));
+    $("#color1 td.hslSValue").text((coloroutput[5]["s"]*100).toFixed(0));
+    $("#color1 td.hslLValue").text((coloroutput[5]["l"]*100).toFixed(0));
   } else {
-  $("div"+targetid+" .card-header .card-subtitle")
-      .html(
-        //coloroutput[1]+"<span class=\"text-warning\">"+deltas["r"]+"</span><br>"+
-        coloroutput[1]+"\t"+JSON.stringify(deltas["rgb"])+"<br>"+
-        coloroutput[2]+"\t"+JSON.stringify(deltas["hsv"])+"<br>"+
-        coloroutput[4]+"\t"+JSON.stringify(deltas["hsl"])
-      );
+    $("div"+targetid+" td.rValue").text(coloroutput[7]["r"]);
+    $("div"+targetid+" td.gValue").text(coloroutput[7]["g"]);
+    $("div"+targetid+" td.bValue").text(coloroutput[7]["b"]);
+    $("div"+targetid+" td.hsvHValue").text((coloroutput[3]["h"]).toFixed(0));
+    $("div"+targetid+" td.hsvSValue").text((coloroutput[3]["s"]*100).toFixed(0));
+    $("div"+targetid+" td.hsvVValue").text((coloroutput[3]["v"]*100).toFixed(0));
+    $("div"+targetid+" td.hslHValue").text((coloroutput[5]["h"]).toFixed(0));
+    $("div"+targetid+" td.hslSValue").text((coloroutput[5]["s"]*100).toFixed(0));
+    $("div"+targetid+" td.hslLValue").text((coloroutput[5]["l"]*100).toFixed(0));
+    $("div"+targetid+" td.rDelta").text(deltas["rgb"]["r"]);
+    $("div"+targetid+" td.gDelta").text(deltas["rgb"]["g"]);
+    $("div"+targetid+" td.bDelta").text(deltas["rgb"]["b"]);
+    $("div"+targetid+" td.hsvHDelta").text(deltas["hsv"]["h"]);
+    $("div"+targetid+" td.hsvSDelta").text(deltas["hsv"]["s"]);
+    $("div"+targetid+" td.hsvVDelta").text(deltas["hsv"]["v"]);
+    $("div"+targetid+" td.hslHDelta").text(deltas["hsl"]["h"]);
+    $("div"+targetid+" td.hslSDelta").text(deltas["hsl"]["s"]);
+    $("div"+targetid+" td.hslLDelta").text(deltas["hsl"]["l"]);
   }
   $("h1").css('color',coloroutput[0]);
   return coloroutput;
@@ -80,15 +114,15 @@ function calcDifference(id1, id2){
   var color1 = getColorValues(rgb1);
   var color2 = getColorValues(rgb2);
   var deltas = {rgb:{},hsv:{},hsl:{}};
-  deltas["rgb"]["r"] = (color1["rgb"]["r"] - color2["rgb"]["r"]).toFixed(0);
-  deltas["rgb"]["g"] = (color1["rgb"]["g"] - color2["rgb"]["g"]).toFixed(0);
-  deltas["rgb"]["b"] = (color1["rgb"]["b"] - color2["rgb"]["b"]).toFixed(0);
-  deltas["hsv"]["h"] = (color1["hsv"]["h"] - color2["hsv"]["h"]);
-  deltas["hsv"]["s"] = (color1["hsv"]["s"] - color2["hsv"]["s"]);
-  deltas["hsv"]["v"] = (color1["hsv"]["v"] - color2["hsv"]["v"]);
-  deltas["hsl"]["h"] = (color1["hsl"]["h"] - color2["hsl"]["h"]);
-  deltas["hsl"]["s"] = (color1["hsl"]["s"] - color2["hsl"]["s"]);
-  deltas["hsl"]["l"] = (color1["hsl"]["l"] - color2["hsl"]["l"]);
+  deltas["rgb"]["r"] = (color2["rgb"]["r"] - color1["rgb"]["r"]).toFixed(0);
+  deltas["rgb"]["g"] = (color2["rgb"]["g"] - color1["rgb"]["g"]).toFixed(0);
+  deltas["rgb"]["b"] = (color2["rgb"]["b"] - color1["rgb"]["b"]).toFixed(0);
+  deltas["hsv"]["h"] = (color2["hsv"]["h"] - color1["hsv"]["h"]);
+  deltas["hsv"]["s"] = (color2["hsv"]["s"] - color1["hsv"]["s"]);
+  deltas["hsv"]["v"] = (color2["hsv"]["v"] - color1["hsv"]["v"]);
+  deltas["hsl"]["h"] = (color2["hsl"]["h"] - color1["hsl"]["h"]);
+  deltas["hsl"]["s"] = (color2["hsl"]["s"] - color1["hsl"]["s"]);
+  deltas["hsl"]["l"] = (color2["hsl"]["l"] - color1["hsl"]["l"]);
   return deltas;
 }
 

@@ -1,105 +1,463 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta http-equiv="x-ua-compatible" content="ie=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta />
-        <title>Color Palette Deconstructor</title>
-        <link rel="stylesheet" href="css/spectre.min.css">
-        <link rel="stylesheet" href="css/spectre-exp.min.css">
-        <link rel="stylesheet" href="css/spectre-icons.min.css">
-        <link rel="stylesheet" href="css/spectrum.css">
-        <style>
-            div.card {
-                box-shadow: 0px 6px 6px 0px rgba(0,0,0,0.2);
-            }
-            div.card-image,
-            div.card-image .img-responsive {
-              min-height:150px;
-              height:150px;
-            }
-            div.card-image .img-responsive .card-title {
-              padding:16px;
-              font-size: 1.8em;
-            }
-        </style>
-    </head>
-    <body>
-      <div class="container">
-        <h1>Color Palette Deconstructor</h1>
-        <div class="columns">
-          <div class="column col-xs-12">
-            <div class="card" id="color1">
-              <div class="card-image">
-                <div class="img-responsive" style="background:#bada55;" data-color="#color1">
-                    <div class="card-title h5 text-light"></div>
-                </div>
-              </div>
-              <div class="card-header">
-                <div class="card-title h5"></div>
-                <div class="card-subtitle text-gray"></div>
-              </div>
-              <div class="card-body">
-                <input class="nosepicker" data-color="#color1" type="text" value="#bada55">
-              </div>
-              <div class="card-footer">
-                <button class="btn btn-primary s-circle"><i class="icon icon-plus"></i></button>
-                <button class="btn btn-primary s-circle"><i class="icon icon-cross"></i></button>
-                <button class="btn btn-primary s-circle"><i class="icon icon-flag"></i></button>
-              </div>
-            </div>
-          </div>
-          <div class="column col-xs-12">
-            <div class="card" id="color2">
-              <div class="card-image">
-                <div class="img-responsive" style="background:#bada44;" data-color="#color2">
-                    <div class="card-title h5 text-light"></div>
-                </div>
-              </div>
-              <div class="card-header">
-                <div class="card-title h5"></div>
-                <div class="card-subtitle text-gray"></div>
-              </div>
-              <div class="card-body">
-                <input class="nosepicker" data-color="#color2" type="text" value="#bada44">
-              </div>
-              <div class="card-footer">
-                <button class="btn btn-primary s-circle"><i class="icon icon-plus"></i></button>
-                <button class="btn btn-primary s-circle"><i class="icon icon-cross"></i></button>
-                <button class="btn btn-primary s-circle"><i class="icon icon-flag"></i></button>
-              </div>
-            </div>
-          </div>
-          <div class="column col-xs-12">
-            <div class="card" id="color3">
-              <div class="card-image">
-                <div class="img-responsive" style="background:#bada11;" data-color="#color3">
-                    <div class="card-title h5 text-light"></div>
-                </div>
-              </div>
-              <div class="card-header">
-                <div class="card-title h5"></div>
-                <div class="card-subtitle text-gray"></div>
-              </div>
-              <div class="card-body">
-                <input class="nosepicker" data-color="#color3" type="text" value="#bada11">
-              </div>
-              <div class="card-footer">
-                <button class="btn btn-primary s-circle"><i class="icon icon-plus"></i></button>
-                <button class="btn btn-primary s-circle"><i class="icon icon-cross"></i></button>
-                <button id="calctest" class="btn btn-primary s-circle"><i class="icon icon-flag"></i></button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <script
-			  src="https://code.jquery.com/jquery-3.4.1.min.js"
-			  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-			  crossorigin="anonymous"></script>
-      <script src='js/spectrum.js'></script>
-      <script src='js/disintegrator.js'></script
-    </body>
-</html>
-
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="x-ua-compatible" content="ie=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<meta />
+	<title>Color Theme Deconstructor</title>
+	<link rel="stylesheet" href="css/spectre.min.css">
+	<link rel="stylesheet" href="css/spectre-exp.min.css">
+	<link rel="stylesheet" href="css/spectre-icons.min.css">
+	<link rel="stylesheet" href="css/spectrum.css">
+	<style>
+		div.card {
+			box-shadow: 0px 6px 6px 0px rgba(0,0,0,0.2);
+			margin-bottom:20px;
+			border-top-right-radius: 25px;
+			border-bottom-left-radius: 25px;
+			}
+		div.card-image,
+		div.card-image .img-responsive {
+			min-height:150px;
+			height:150px;
+			border-top-right-radius:25px;
+			box-shadow: inset 0px -6px 6px rgba(127,127,127,0.2);
+			}
+		div.card-image .img-responsive .card-title {
+			padding:16px;
+			font-size: 1.8em;
+			}
+		div.card-footer {
+			text-align: right;
+			}
+		table.table th,
+		table.table td {
+			padding:4px;
+			font-size:0.7em;
+			}
+		tr.tabledivider {
+			border-top:2px solid #555;
+			}
+		th {
+			background-color: #efefef;
+			}
+		th.hsv {
+			background-color: #777;
+			color: white;
+			}
+		th.hsl {
+			background-color: #aaa;
+			color: white;
+			}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<h1>Color Theme Deconstructor</h1>
+		<div class="columns">
+			<!-- Color picker 1 -->
+			<div class="column col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+				<div class="card" id="color1">
+					<div class="card-image">
+						<div class="img-responsive" style="background:#44aaff;" data-color="#color1">
+							<div class="card-title h5 text-light"></div>
+						</div>
+					</div>
+					<div class="card-header">
+						<div class="card-title h5"></div>
+						<table class="table table-striped">
+							<tr>
+								<th scope="row">R</th>
+								<td class="rValue">255</td>
+							</tr>
+							<tr>
+								<th scope="row">G</th>
+								<td class="gValue">255</td>
+							</tr>
+							<tr>
+								<th scope="row">B</th>
+								<td class="bValue">255</td>
+							</tr>
+							<tr class="tabledivider">
+								<th scope="row" class="hsv">H</th>
+								<td class="hsvHValue">255</td>
+							</tr>
+							<tr>
+								<th scope="row" class="hsv">S</th>
+								<td class="hsvSValue">255</td>
+							</tr>
+							<tr>
+								<th scope="row" class="hsv">V</th>
+								<td class="hsvVValue">255</td>
+							</tr>
+							<tr class="tabledivider">
+								<th scope="row" class="hsl">H</th>
+								<td class="hslHValue">255</td>
+							</tr>
+							<tr>
+								<th scope="row" class="hsl">S</th>
+								<td class="hslSValue">255</td>
+							</tr>
+							<tr>
+								<th scope="row" class="hsl">L</th>
+								<td class="hslLValue">255</td>
+							</tr>
+						</table>
+					</div>
+					<div class="card-body">
+						<input class="nosepicker" data-color="#color1" type="text" value="#aaff44">
+					</div>
+					<div class="card-footer">
+						<button class="btn  s-rounded"><i class="icon icon-plus"></i></button>
+						<button class="btn  s-rounded"><i class="icon icon-cross"></i></button>
+						<button class="btn  s-rounded"><i class="icon icon-flag"></i></button>
+					</div>
+				</div>
+			</div>
+			<!-- Color picker 2 -->
+			<div class="column col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+				<div class="card" id="color2">
+					<div class="card-image">
+						<div class="img-responsive" style="background:#ff44aa" data-color="#color2">
+							<div class="card-title h5 text-light"></div>
+						</div>
+					</div>
+					<div class="card-header">
+						<div class="card-title h5"></div>
+						<table class="table table-striped">
+							<tr>
+								<th scope="row">R</th>
+								<td class="rValue">255</td>
+								<td class="rDelta">255</td>
+							</tr>
+							<tr>
+								<th scope="row">G</th>
+								<td class="gValue">255</td>
+								<td class="gDelta">255</td>
+							</tr>
+							<tr>
+								<th scope="row">B</th>
+								<td class="bValue">255</td>
+								<td class="bDelta">255</td>
+							</tr>
+							<tr class="tabledivider">
+								<th scope="row" class="hsv">H</th>
+								<td class="hsvHValue">255</td>
+								<td class="hsvHDelta">255</td>
+							</tr>
+							<tr>
+								<th scope="row" class="hsv">S</th>
+								<td class="hsvSValue">255</td>
+								<td class="hsvSDelta">255</td>
+							</tr>
+							<tr>
+								<th scope="row" class="hsv">V</th>
+								<td class="hsvVValue">255</td>
+								<td class="hsvVDelta">255</td>
+							</tr>
+							<tr class="tabledivider">
+								<th scope="row" class="hsl">H</th>
+								<td class="hslHValue">255</td>
+								<td class="hslHDelta">255</td>
+							</tr>
+							<tr>
+								<th scope="row" class="hsl">S</th>
+								<td class="hslSValue">255</td>
+								<td class="hslSDelta">255</td>
+							</tr>
+							<tr>
+								<th scope="row" class="hsl">L</th>
+								<td class="hslLValue">255</td>
+								<td class="hslLDelta">255</td>
+							</tr>
+						</table>
+					</div>
+					<div class="card-body">
+						<input class="nosepicker" data-color="#color2" type="text" value="#ffaa44">
+					</div>
+					<div class="card-footer">
+						<button class="btn  s-rounded"><i class="icon icon-plus"></i></button>
+						<button class="btn  s-rounded"><i class="icon icon-cross"></i></button>
+						<button class="btn  s-rounded"><i class="icon icon-flag"></i></button>
+					</div>
+				</div>
+			</div>
+			<!-- Color picker 3 -->
+			<div class="column col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+				<div class="card" id="color3">
+					<div class="card-image">
+						<div class="img-responsive" style="background:#44aaff;" data-color="#color3">
+							<div class="card-title h5 text-light"></div>
+						</div>
+					</div>
+					<div class="card-header">
+						<div class="card-title h5"></div>
+						<table class="table table-striped">
+							<tr>
+								<th scope="row">R</th>
+								<td class="rValue">255</td>
+								<td class="rDelta">255</td>
+							</tr>
+							<tr>
+								<th scope="row">G</th>
+								<td class="gValue">255</td>
+								<td class="gDelta">255</td>
+							</tr>
+							<tr>
+								<th scope="row">B</th>
+								<td class="bValue">255</td>
+								<td class="bDelta">255</td>
+							</tr>
+							<tr class="tabledivider">
+								<th scope="row" class="hsv">H</th>
+								<td class="hsvHValue">255</td>
+								<td class="hsvHDelta">255</td>
+							</tr>
+							<tr>
+								<th scope="row" class="hsv">S</th>
+								<td class="hsvSValue">255</td>
+								<td class="hsvSDelta">255</td>
+							</tr>
+							<tr>
+								<th scope="row" class="hsv">V</th>
+								<td class="hsvVValue">255</td>
+								<td class="hsvVDelta">255</td>
+							</tr>
+							<tr class="tabledivider">
+								<th scope="row" class="hsl">H</th>
+								<td class="hslHValue">255</td>
+								<td class="hslHDelta">255</td>
+							</tr>
+							<tr>
+								<th scope="row" class="hsl">S</th>
+								<td class="hslSValue">255</td>
+								<td class="hslSDelta">255</td>
+							</tr>
+							<tr>
+								<th scope="row" class="hsl">L</th>
+								<td class="hslLValue">255</td>
+								<td class="hslLDelta">255</td>
+							</tr>
+						</table>
+					</div>
+					<div class="card-body">
+						<input class="nosepicker" data-color="#color3" type="text" value="#ff44aa">
+					</div>
+					<div class="card-footer">
+						<button class="btn  s-rounded"><i class="icon icon-plus"></i></button>
+						<button class="btn  s-rounded"><i class="icon icon-cross"></i></button>
+						<button id="calctest" class="btn  s-rounded"><i class="icon icon-flag"></i></button>
+					</div>
+				</div>
+			</div>
+			<!-- Color picker 4 -->
+			<div class="column col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+				<div class="card" id="color4">
+					<div class="card-image">
+						<div class="img-responsive" style="background:#44aaff;" data-color="#color4">
+							<div class="card-title h5 text-light"></div>
+						</div>
+					</div>
+					<div class="card-header">
+						<div class="card-title h5"></div>
+						<table class="table table-striped">
+							<tr>
+								<th scope="row">R</th>
+								<td class="rValue">255</td>
+								<td class="rDelta">255</td>
+							</tr>
+							<tr>
+								<th scope="row">G</th>
+								<td class="gValue">255</td>
+								<td class="gDelta">255</td>
+							</tr>
+							<tr>
+								<th scope="row">B</th>
+								<td class="bValue">255</td>
+								<td class="bDelta">255</td>
+							</tr>
+							<tr class="tabledivider">
+								<th scope="row" class="hsv">H</th>
+								<td class="hsvHValue">255</td>
+								<td class="hsvHDelta">255</td>
+							</tr>
+							<tr>
+								<th scope="row" class="hsv">S</th>
+								<td class="hsvSValue">255</td>
+								<td class="hsvSDelta">255</td>
+							</tr>
+							<tr>
+								<th scope="row" class="hsv">V</th>
+								<td class="hsvVValue">255</td>
+								<td class="hsvVDelta">255</td>
+							</tr>
+							<tr class="tabledivider">
+								<th scope="row" class="hsl">H</th>
+								<td class="hslHValue">255</td>
+								<td class="hslHDelta">255</td>
+							</tr>
+							<tr>
+								<th scope="row" class="hsl">S</th>
+								<td class="hslSValue">255</td>
+								<td class="hslSDelta">255</td>
+							</tr>
+							<tr>
+								<th scope="row" class="hsl">L</th>
+								<td class="hslLValue">255</td>
+								<td class="hslLDelta">255</td>
+							</tr>
+						</table>
+					</div>
+					<div class="card-body">
+						<input class="nosepicker" data-color="#color4" type="text" value="#ff44aa">
+					</div>
+					<div class="card-footer">
+						<button class="btn  s-rounded"><i class="icon icon-plus"></i></button>
+						<button class="btn  s-rounded"><i class="icon icon-cross"></i></button>
+						<button id="calctest" class="btn  s-rounded"><i class="icon icon-flag"></i></button>
+					</div>
+				</div>
+			</div>
+			<!-- Color picker 5 -->
+			<div class="column col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+				<div class="card" id="color5">
+					<div class="card-image">
+						<div class="img-responsive" style="background:#44aaff;" data-color="#color5">
+							<div class="card-title h5 text-light"></div>
+						</div>
+					</div>
+					<div class="card-header">
+						<div class="card-title h5"></div>
+						<table class="table table-striped">
+							<tr>
+								<th scope="row">R</th>
+								<td class="rValue">255</td>
+								<td class="rDelta">255</td>
+							</tr>
+							<tr>
+								<th scope="row">G</th>
+								<td class="gValue">255</td>
+								<td class="gDelta">255</td>
+							</tr>
+							<tr>
+								<th scope="row">B</th>
+								<td class="bValue">255</td>
+								<td class="bDelta">255</td>
+							</tr>
+							<tr class="tabledivider">
+								<th scope="row" class="hsv">H</th>
+								<td class="hsvHValue">255</td>
+								<td class="hsvHDelta">255</td>
+							</tr>
+							<tr>
+								<th scope="row" class="hsv">S</th>
+								<td class="hsvSValue">255</td>
+								<td class="hsvSDelta">255</td>
+							</tr>
+							<tr>
+								<th scope="row" class="hsv">V</th>
+								<td class="hsvVValue">255</td>
+								<td class="hsvVDelta">255</td>
+							</tr>
+							<tr class="tabledivider">
+								<th scope="row" class="hsl">H</th>
+								<td class="hslHValue">255</td>
+								<td class="hslHDelta">255</td>
+							</tr>
+							<tr>
+								<th scope="row" class="hsl">S</th>
+								<td class="hslSValue">255</td>
+								<td class="hslSDelta">255</td>
+							</tr>
+							<tr>
+								<th scope="row" class="hsl">L</th>
+								<td class="hslLValue">255</td>
+								<td class="hslLDelta">255</td>
+							</tr>
+						</table>
+					</div>
+					<div class="card-body">
+						<input class="nosepicker" data-color="#color5" type="text" value="#ff44aa">
+					</div>
+					<div class="card-footer">
+						<button class="btn  s-rounded"><i class="icon icon-plus"></i></button>
+						<button class="btn  s-rounded"><i class="icon icon-cross"></i></button>
+						<button id="calctest" class="btn  s-rounded"><i class="icon icon-flag"></i></button>
+					</div>
+				</div>
+			</div>
+			<!-- Color picker 6 -->
+			<div class="column col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+				<div class="card" id="color6">
+					<div class="card-image">
+						<div class="img-responsive" style="background:#44aaff;" data-color="#color6">
+							<div class="card-title h5 text-light"></div>
+						</div>
+					</div>
+					<div class="card-header">
+						<div class="card-title h5"></div>
+						<table class="table table-striped">
+							<tr>
+								<th scope="row">R</th>
+								<td class="rValue">255</td>
+								<td class="rDelta">255</td>
+							</tr>
+							<tr>
+								<th scope="row">G</th>
+								<td class="gValue">255</td>
+								<td class="gDelta">255</td>
+							</tr>
+							<tr>
+								<th scope="row">B</th>
+								<td class="bValue">255</td>
+								<td class="bDelta">255</td>
+							</tr>
+							<tr class="tabledivider">
+								<th scope="row" class="hsv">H</th>
+								<td class="hsvHValue">255</td>
+								<td class="hsvHDelta">255</td>
+							</tr>
+							<tr>
+								<th scope="row" class="hsv">S</th>
+								<td class="hsvSValue">255</td>
+								<td class="hsvSDelta">255</td>
+							</tr>
+							<tr>
+								<th scope="row" class="hsv">V</th>
+								<td class="hsvVValue">255</td>
+								<td class="hsvVDelta">255</td>
+							</tr>
+							<tr class="tabledivider">
+								<th scope="row" class="hsl">H</th>
+								<td class="hslHValue">255</td>
+								<td class="hslHDelta">255</td>
+							</tr>
+							<tr>
+								<th scope="row" class="hsl">S</th>
+								<td class="hslSValue">255</td>
+								<td class="hslSDelta">255</td>
+							</tr>
+							<tr>
+								<th scope="row" class="hsl">L</th>
+								<td class="hslLValue">255</td>
+								<td class="hslLDelta">255</td>
+							</tr>
+						</table>
+					</div>
+					<div class="card-body">
+						<input class="nosepicker" data-color="#color6" type="text" value="#ff44aa">
+					</div>
+					<div class="card-footer">
+						<button class="btn s-rounded"><i class="icon icon-plus"></i></button>
+						<button class="btn s-rounded"><i class="icon icon-cross"></i></button>
+						<button class="btn  s-rounded"><i class="icon icon-flag"></i></button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="https://code.jquery.com/jquery-3.4.1.min.js"integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="crossorigin="anonymous"></script>
+		<script src='js/spectrum.js'></script>
+		<script src='js/disintegrator.js'></script>
+	</body>
+	</html>
