@@ -28,7 +28,7 @@ Color Theme Disintegrator
 - [ ] Enable selection of focus color
 
 - Possible Javascript libraries for color pickers:
-  * [[https://jscolor.com][jscolor.com]]
+  * ~~[[https://jscolor.com][jscolor.com]]~~
   * [[http://bgrins.github.io/spectrum/][Spectrum]]
 
 
