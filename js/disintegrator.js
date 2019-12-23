@@ -39,6 +39,8 @@ $(document).ready(function(){
   });
 });
 
+function swapColorWithPrimary(){}
+
 // Called whenever color picker opens, RGB hex changes, or picker moved
 function colorChange(targetid, color){
   var coloroutput = [
@@ -154,4 +156,17 @@ $("div.card-image .img-responsive").click(function(color){
   $(whichpicker).spectrum("toggle");
   // Important to keep picker from closing immediately after opening
   return false;
+});
+
+// Swap flagged card with primary color card
+$("button.procolor").click(function(){
+  var thiscardid = "#" + $(this).closest('div.card').attr('id');
+  var rootclass = 'input[data-color="#color1"]';
+  var thisclass = 'input[data-color="' + thiscardid + '"]';
+  var rootcolor = $(rootclass).spectrum("get");
+  var thiscolor = $(thisclass).spectrum("get");
+  colorChange('#color1',thiscolor);
+  colorChange(thiscardid,rootcolor);
+  $(rootclass).spectrum("set",thiscolor);
+  $(thisclass).spectrum("set",rootcolor);
 });
