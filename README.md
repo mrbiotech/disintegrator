@@ -23,9 +23,9 @@ Color Theme Disintegrator
 - [X] Show color value deltas from first color in cards
 - [x] Put color calculations in a grid so they're more readable
 - [X] Enable clicking card header to toggle display of picker
+- [X] Enable selection of focus color
 - [ ] Enable dynamic numbers of palette widgets
     - Might use React for this
-- [ ] Enable selection of focus color
 
 - Possible Javascript libraries for color pickers:
   * ~~[[https://jscolor.com][jscolor.com]]~~
