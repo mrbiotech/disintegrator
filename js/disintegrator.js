@@ -39,8 +39,6 @@ $(document).ready(function(){
   });
 });
 
-function swapColorWithPrimary(){}
-
 // Called whenever color picker opens, RGB hex changes, or picker moved
 function colorChange(targetid, color){
   var coloroutput = [
@@ -87,6 +85,8 @@ function colorChange(targetid, color){
     $("div"+targetid+" td.hslLDelta").text(deltas["hsl"]["l"]);
   }
   $("h1").css('color',coloroutput[0]);
+  var deltas = outputDeltas();
+  // $('#themeoutput').text(deltas);
   return coloroutput;
 }
 
@@ -131,6 +131,22 @@ function calcDifference(id1, id2){
   return deltas;
 }
 
+// Create object containing ALL color deltas to populate an
+// object easily exported/imported
+function outputDeltas(){
+    var theme = {}
+    theme["Color2"] = calcDifference("#color1","#color2");
+    theme["Color3"] = calcDifference("#color1","#color3");
+    theme["Color4"] = calcDifference("#color1","#color4");
+    theme["Color5"] = calcDifference("#color1","#color5");
+    theme["Color6"] = calcDifference("#color1","#color6");
+    // for (x in theme) {
+    // }
+    $('div#themeoutput').text(JSON.stringify(theme));
+    console.log(theme);
+    return theme;
+}
+
 // Trigger events to show color pickers
 $("input.nosepicker").on('move.spectrum', function(e, color){
   var thisitem = e.target;
@@ -148,7 +164,6 @@ $("input.nosepicker").on('show.spectrum', function(e, color){
   colorChange(whichitem, color);
 });
 
-
 // Show respective color picker when card header is clicked
 $("div.card-image .img-responsive").click(function(color){
   var whichitem = $(this).attr("data-color");
@@ -165,8 +180,8 @@ $("button.procolor").click(function(){
   var thisclass = 'input[data-color="' + thiscardid + '"]';
   var rootcolor = $(rootclass).spectrum("get");
   var thiscolor = $(thisclass).spectrum("get");
-  colorChange('#color1',thiscolor);
-  colorChange(thiscardid,rootcolor);
+  var array1 = colorChange('#color1',thiscolor);
+  var array2 = colorChange(thiscardid,rootcolor);
   $(rootclass).spectrum("set",thiscolor);
   $(thisclass).spectrum("set",rootcolor);
 });
